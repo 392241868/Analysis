@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bootstrap-select test page</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+      <link href="../css/jquery.dataTables.min.css" rel="stylesheet">
+  <style>
+    body {
+      padding-top: 70px;
+    }
+  </style>
+  <script src="../js/jquery.min.js"></script>
+  <script src="../js/jquery.dataTables.min.js"></script>
+   <script src="../js/sb-admin-2.js"></script>
+</head>
+<body>
+<table id="meterDataExp" width="100%" class="display">
+    <thead>
+        <tr>
+           <th>时间</th>
+          <th>广告客户</th>
+          <th>订单名称</th>
+          <th>计划单名称</th>
+          <th>计划流量</th>
+          <th>实际流量</th>
+          <th>曝光率？</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<script type="text/javascript">
+  
+ oTable =  $('#meterDataExp').dataTable({
+                                         "bProcessing": true,   //显示是否加载
+                                         "sScrollX":"100%",
+                                         "bJQueryUI": true,
+                                         "sScrollY": 230,
+                                         "bDestroy":true,
+                                         "iDisplayLength":10,
+                                         //"aaSorting": [[ 2, "desc" ]],//给列表排序 ，第一个参数表示数组 。4 就是css grade那列。第二个参数为 desc或是asc
+                                         "sScrollXInner": "100%",
+                                         "sPaginationType": "full_numbers",
+                                        "ajax":'http://api.log.skysrt.com/report-spark-web/ad/getResult?beginTime=2016-05-23&endTime=2016-05-23&company=%E9%85%B7%E5%BC%80&order_name=%E9%82%A3%E5%B9%B4&schedule_name=%E9%82%A3%E5%B9%B4',
+                                       "bSort": true,   //关闭排序
+                                      "bServerSide":true,//打开服务器模式，这个是最重要的</font>
+                                         "aoColumns": [
+                                                        { "mDataProp": "stat_date"},
+                                                        { "mDataProp": "total_user"}
+                                                ],
+
+                                         "aoColumnDefs": [//和aoColums类似，但他可以给指定列附近爱属性
+                                            {"bSortable": false, "aTargets": [0]},  //这句话意思是第1,3,6,7,8,9列（从0开始算） 不能排序
+                                            {"bSearchable": false, "aTargets": [0,1]}, //bSearchable 这个属性表示是否可以全局搜索，其实在服务器端分页中是没用的
+                                        ],
+                                                          
+                      });
+
+
+</script>
+</body>
+</html>
